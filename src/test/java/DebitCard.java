@@ -90,4 +90,14 @@ class DebitCardTest {
         boolean actual = driver.findElement(By.cssSelector("[data-test-id='agreement'].input_invalid .checkbox__text")).isDisplayed();
         assertTrue(actual);
     }
+    @Test
+    void shouldInputEmptyName() {
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79052228899");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
+        driver.findElement(By.cssSelector("button.button_theme_alfa-on-white")).click();
+
+        String expected = "Поле обязательно для заполнения";
+        String actual = driver.findElement(By.cssSelector("[data-test-id='name'].input_invalid .input__sub")).getText().trim();
+        assertEquals(expected, actual);
+    }
 }
